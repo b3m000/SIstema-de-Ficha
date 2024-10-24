@@ -143,3 +143,21 @@ projeto_pacientes/
 
 ## 📞 Suporte
 Se precisar de ajuda, entre em contato comigo. 😊
+
+Passo 1: Crie um Arquivo .bat (Batch)
+Abra o Bloco de Notas.
+Cole o seguinte código, substituindo caminho/para/python e caminho/para/seu/projeto pelos caminhos corretos:
+@echo off
+cd caminho\para\seu\projeto
+caminho\para\python main.py
+pause
+
+Exemplo:
+@echo off
+cd C:\Clinica
+C:\Users\bento\AppData\Local\Programs\Python\Python313\python.exe main.py
+pause
+
+para achar o python 
+w+R cmd
+where python ou which python3
