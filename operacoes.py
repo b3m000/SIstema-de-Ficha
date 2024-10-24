@@ -3,6 +3,10 @@ from banco import conectar
 from validacao import validar_data, validar_telefone, normalizar_nome
 from tabulate import tabulate
 import csv
+import os
+
+def limpar_tela():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 def cadastrar_paciente():
     nome = input("Nome e Sobrenome: ").strip()
@@ -78,12 +82,17 @@ def listar_pacientes_por_letra(letra, pagina=1, limite=5):
         print(f"Ocorreu um erro inesperado: {ex}")
     finally:
         conn.close()
+
 def listar_pacientes():
     letra = input("Informe a letra inicial do paciente: ").upper()
     pagina_atual = 1
 
     while True:
+        limpar_tela()  # Limpa a tela a cada nova exibição de página
         total_paginas = listar_pacientes_por_letra(letra, pagina_atual)
+
+        if total_paginas is None:  # Se não há pacientes
+            break
 
         comando = input("Digite 'P' para página anterior, 'N' para próxima página ou 'S' para sair: ").strip().upper()
         if comando == 'P' and pagina_atual > 1:
@@ -92,7 +101,6 @@ def listar_pacientes():
             pagina_atual += 1
         elif comando == 'S':
             break
-
 
 def buscar_paciente():
     """Busca pacientes pelo nome ou parte do nome."""
