@@ -34,12 +34,12 @@ def cadastrar_paciente():
     finally:
         conn.close()
 
-def listar_pacientes_por_letra(letra):
-    """Lista pacientes com nomes que começam pela letra fornecida."""
+def listar_pacientes_por_letra(letra, pagina=1, limite=5):
+    """Lista pacientes com nomes que começam pela letra fornecida, com paginação."""
     try:
         conn = conectar()
         cursor = conn.cursor()
-        cursor.execute('''
+        cursor.execute(''' 
             SELECT id, nome, data_nascimento, telefone 
             FROM pacientes 
             WHERE nome LIKE ? COLLATE NOCASE 
@@ -47,14 +47,52 @@ def listar_pacientes_por_letra(letra):
         ''', (letra + '%',))
         pacientes = cursor.fetchall()
 
-        if pacientes:
-            print(tabulate(pacientes, headers=['ID', 'Nome', 'Data de Nascimento', 'Telefone'], tablefmt='fancy_grid'))
-        else:
+        if not pacientes:
             print(f"Nenhum paciente encontrado para a letra {letra}.")
+            return
+        
+        total_registros = len(pacientes)
+        total_paginas = (total_registros + limite - 1) // limite
+
+        inicio = (pagina - 1) * limite
+        fim = min(inicio + limite, total_registros)
+
+        print(f"Página {pagina}/{total_paginas}")
+        
+        # Cria uma lista dos pacientes que serão exibidos
+        pacientes_a_exibir = pacientes[inicio:fim]
+        
+        # Exibe os pacientes formatados em tabela
+        print(tabulate(pacientes_a_exibir, headers=['ID', 'Nome', 'Data de Nascimento', 'Telefone'], tablefmt='fancy_grid'))
+
+        if pagina > 1:
+            print("Pressione 'P' para página anterior")
+        if pagina < total_paginas:
+            print("Pressione 'N' para próxima página")
+        
+        return total_paginas
+
     except sqlite3.Error as e:
         print(f"Erro ao listar pacientes: {e}")
+    except Exception as ex:
+        print(f"Ocorreu um erro inesperado: {ex}")
     finally:
         conn.close()
+def listar_pacientes():
+    letra = input("Informe a letra inicial do paciente: ").upper()
+    pagina_atual = 1
+
+    while True:
+        total_paginas = listar_pacientes_por_letra(letra, pagina_atual)
+
+        comando = input("Digite 'P' para página anterior, 'N' para próxima página ou 'S' para sair: ").strip().upper()
+        if comando == 'P' and pagina_atual > 1:
+            pagina_atual -= 1
+        elif comando == 'N' and pagina_atual < total_paginas:
+            pagina_atual += 1
+        elif comando == 'S':
+            break
+
 
 def buscar_paciente():
     """Busca pacientes pelo nome ou parte do nome."""

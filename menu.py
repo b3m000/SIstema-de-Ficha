@@ -4,7 +4,7 @@ def limpar_tela():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def menu():
-    from operacoes import cadastrar_paciente, listar_pacientes_por_letra, buscar_paciente, editar_paciente, excluir_paciente, exportar_para_csv
+    from operacoes import cadastrar_paciente, listar_pacientes, buscar_paciente, editar_paciente, excluir_paciente, exportar_para_csv
     from banco import criar_tabela
 
     criar_tabela()
@@ -25,7 +25,7 @@ def menu():
         if opcao == '1':
             cadastrar_paciente()
         elif opcao == '2':
-            listar_pacientes_por_letra(input("Informe a letra inicial: ").upper())
+            listar_pacientes()  # Chama a nova função de listagem com paginação
         elif opcao == '3':
             buscar_paciente()
         elif opcao == '4':
