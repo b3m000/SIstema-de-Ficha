@@ -1,0 +1,145 @@
+
+# Sistema de Gerenciamento de Pacientes
+
+Este programa é um sistema simples de gerenciamento de pacientes utilizando Python e SQLite.  
+Com ele, você pode cadastrar, listar, buscar, editar, excluir e exportar pacientes para arquivos CSV.
+
+---
+
+## 📋 Funcionalidades
+1. **Cadastrar Novo Paciente**: Insira o nome completo, data de nascimento e telefone.
+2. **Listar Pacientes por Letra**: Veja pacientes cujos nomes começam com uma letra específica.
+3. **Buscar Paciente**: Pesquise pacientes pelo nome ou parte do nome.
+4. **Editar Paciente**: Atualize as informações de um paciente já cadastrado.
+5. **Excluir Paciente**: Remova um paciente da base de dados.
+6. **Exportar para CSV**: Exporte pacientes para arquivos CSV organizados por letra inicial.
+
+---
+
+## ⚙️ Requisitos para Utilizar o Programa
+1. **Python 3.x**: Certifique-se de que o Python está instalado no seu computador.
+   - Você pode baixar e instalar o Python aqui: https://www.python.org/downloads/
+   - Durante a instalação, selecione a opção **"Add Python to PATH"**.
+
+2. **Instalar dependências**: Abra o **Prompt de Comando** (Windows) ou **Terminal** (Linux/macOS) e execute:
+   ```bash
+   pip install tabulate sqlite
+   ```
+
+   - A biblioteca `sqlite` pode precisar ser instalada manualmente em alguns ambientes, embora faça parte da instalação padrão do Python.
+
+---
+
+## 🛠️ Como Baixar e Executar o Projeto
+
+### 1. Baixe o projeto
+- **Opção 1**: Clone o projeto do GitHub (se você estiver utilizando um repositório):
+   ```bash
+   git clone <URL_DO_REPOSITORIO>
+   ```
+- **Opção 2**: Baixe o projeto manualmente e extraia o arquivo ZIP para a pasta desejada.
+
+### 2. Navegue até a pasta do projeto
+Abra o terminal e digite:
+```bash
+cd caminho/para/a/pasta/projeto_pacientes
+```
+
+### 3. Execute o programa
+Inicie o sistema com:
+```bash
+python main.py
+```
+
+---
+
+## 📝 Como Usar o Sistema
+
+### Menu Principal
+Ao iniciar o programa, você verá o seguinte menu:
+
+```
+===== Clínica Médica =====
+1. Cadastrar Novo Paciente
+2. Listar Pacientes por Letra
+3. Buscar Paciente
+4. Editar Paciente
+5. Excluir Paciente
+6. Exportar para CSV
+0. Sair
+```
+
+Escolha a opção desejada digitando o número correspondente e pressionando **Enter**.
+
+---
+
+### Detalhamento das Opções
+
+#### 1. **Cadastrar Novo Paciente**
+- Insira o **Nome e Sobrenome** do paciente.
+- Insira a **Data de Nascimento**:
+  - Pode ser digitada no formato `ddmmaaaa` (ex: 02051985) ou `dd/mm/aaaa`.
+- Insira o **Telefone**:
+  - Pode ser no formato simples: `27999913109`.
+  - O telefone será formatado automaticamente para `(27) 99991-3109`.
+
+#### 2. **Listar Pacientes por Letra**
+- Digite uma **letra inicial** para listar todos os pacientes cujos nomes começam com essa letra.
+
+#### 3. **Buscar Paciente**
+- Digite o **nome ou parte do nome** para encontrar um paciente específico.
+
+#### 4. **Editar Paciente**
+- Escolha a **letra inicial** do paciente e insira o **ID** do paciente que deseja editar.
+- Atualize os dados do paciente.
+
+#### 5. **Excluir Paciente**
+- Escolha a **letra inicial** e insira o **ID** do paciente que deseja excluir.
+- Confirme a exclusão digitando `s` (sim) ou `n` (não).
+
+#### 6. **Exportar para CSV**
+- Exporta todos os pacientes para arquivos CSV organizados por letras iniciais:
+  - Exemplo: `pacientes_A.csv`, `pacientes_B.csv`.
+
+---
+
+## 📂 Estrutura do Projeto
+```
+projeto_pacientes/
+│
+├── main.py            # Arquivo principal que inicia o programa
+├── banco.py           # Conexão e criação da tabela no banco de dados SQLite
+├── operacoes.py       # Operações de CRUD e exportação para CSV
+├── validacao.py       # Validações e formatações de dados
+├── menu.py            # Lógica do menu principal
+└── README.txt         # Guia de uso do programa (este arquivo)
+```
+
+---
+
+## 📦 Onde Encontrar os Arquivos Exportados?
+- Os arquivos CSV são salvos no mesmo diretório do projeto.
+- Cada arquivo será nomeado como `pacientes_<letra>.csv` (ex: `pacientes_A.csv`).
+
+---
+
+## 🚨 Possíveis Erros e Soluções
+
+1. **Python não encontrado**:
+   - Verifique se o Python está instalado e no **PATH** do sistema.
+   - Execute `python --version` no terminal para verificar se o Python está instalado corretamente.
+
+2. **Erro ao conectar ao banco de dados**:
+   - Verifique se você tem **permissão de escrita** na pasta onde o projeto está salvo.
+
+3. **Problema ao instalar dependências**:
+   - Se a instalação falhar, tente:
+     ```bash
+     pip install --upgrade pip
+     pip install tabulate sqlite
+     ```
+
+---
+
+## 📞 Suporte
+Se precisar de ajuda, entre em contato comigo. 😊
